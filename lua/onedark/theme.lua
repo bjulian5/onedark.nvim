@@ -110,7 +110,7 @@ theme.setup = function(cfg)
 
     Type = { fg = c.yellow1 }, -- (preferred) int, long, char, etc.
     -- StorageClass  = { }, -- static, register, volatile, etc.
-    -- Structure     = { }, --  struct, union, enum, etc.
+    Structure     = {c.red0}, --  struct, union, enum, etc.
     -- Typedef       = { }, --  A typedef
 
     Special = { fg = c.red1 }, -- (preferred) any special symbol
@@ -208,28 +208,28 @@ theme.setup = function(cfg)
     TSConstructor = { fg = c.red1 }, -- For constructor calls and definitions: `= { }` in Lua, and Java constructors.
     -- TSConditional       = { };    -- For keywords related to conditionnals.
     TSConstant = { fg = c.yellow1 }, -- For constants
-    -- TSConstBuiltin      = { };    -- For constant that are built in the language: `nil` in Lua.
+    TSConstBuiltin      = {fg = c.orange0};    -- For constant that are built in the language: `nil` in Lua.
     -- TSConstMacro        = { };    -- For constants that are defined by macros: `NULL` in C.
     -- TSError             = { };    -- For syntax/parser errors.
     -- TSException         = { };    -- For exception related keywords.
-    TSField = { fg = c.cyan0 }, -- For fields.
+    TSField = { fg = c.red0 }, -- For fields.
     -- TSFloat             = { };    -- For floats.
-    -- TSFunction          = { };    -- For function (calls and definitions).
-    -- TSFuncBuiltin       = { };    -- For builtin functions: `table.insert` in Lua.
+    TSFunction          = {fg = c.blue0};    -- For function (calls and definitions).
+    TSFuncBuiltin       = {fg = c.purple0};    -- For builtin functions: `table.insert` in Lua.
     -- TSFuncMacro         = { };    -- For macro defined fuctions (calls and definitions): each `macro_rules` in Rust.
     TSInclude = { fg = c.purple0 }, -- For includes: `#include` in C, `use` or `extern crate` in Rust, or `require` in Lua.
     TSKeyword = { fg = c.purple0, style = cfg.keyword_style }, -- For keywords that don't fall in previous categories.
     TSKeywordFunction = { fg = c.purple0, style = cfg.function_style }, -- For keywords used to define a fuction.
     TSLabel = { fg = c.blue0 }, -- For labels: `label:` in C and `:label:` in Lua.
     jsonTSLabel = { fg = c.red0 }, -- For labels: `label:` in C and `:label:` in Lua.
-    -- TSMethod            = { };    -- For method calls and definitions.
+    TSMethod            = { fg = c.blue0 },   -- For method calls and definitions.
     TSNamespace = { fg = c.red1 }, -- For identifiers referring to modules and namespaces.
     -- TSNone              = { };    -- TODO: docs
     -- TSNumber            = { };    -- For all numbers
     TSOperator = { fg = c.cyan0 }, -- For any operator: `+`, but also `->` and `*` in C.
-    TSParameter = { fg = c.red1 }, -- For parameters of a function.
-    -- TSParameterReference= { };    -- For references to parameters of a function.
-    TSProperty = { fg = c.cyan0 }, -- Same as `TSField`.
+    TSParameter = { fg = c.orange0 }, -- For parameters of a function.
+    TSParameterReference= {fg = c.orange0};    -- For references to parameters of a function.
+    TSProperty = { fg = c.red0 }, -- Same as `TSField`.
     TSPunctDelimiter = { fg = c.fg0 }, -- For delimiters ie: `.`
     TSPunctBracket = { fg = c.fg_dark }, -- For brackets and parens.
     TSPunctSpecial = { fg = c.fg0 }, -- For special punctutation that does not fall in the catagories before.
@@ -237,10 +237,10 @@ theme.setup = function(cfg)
     -- TSString            = { };    -- For strings.
     TSStringRegex = { fg = c.orange1 }, -- For regexes.
     TSStringEscape = { fg = c.red1 }, -- For escape characters within a string.
-    -- TSSymbol            = { };    -- For identifiers referring to symbols or atoms.
-    -- TSType              = { };    -- For types.
-    -- TSTypeBuiltin       = { };    -- For builtin types.
-    TSVariable = { fg = c.red0, style = cfg.variable_style }, -- Any variable name that does not have another highlight.
+    TSSymbol            = { fg = c.red0 };    -- For identifiers referring to symbols or atoms.
+    TSType              = {fg = c.green0};    -- For types.
+    TSTypeBuiltin       = {fg = c.purple0};    -- For builtin types.
+    TSVariable = { fg = c.fg_light, style = cfg.variable_style }, -- Any variable name that does not have another highlight.
     TSVariableBuiltin = { fg = c.yellow1 }, -- Variable names that are defined by the languages, like `this` or `self`.
     TSTag = { fg = c.red1 }, -- Tags like html tag names.
     TSTagAttribute = { fg = c.orange0 },
@@ -290,7 +290,7 @@ theme.setup = function(cfg)
 
     -- ruby
     rubyTSSymbol = { fg = c.cyan0 },
-    rubyTSVariable = { fg = c.blue0 },
+    rubyTSVariable = { fg = c.red0 },
     rubyTSParameter = { fg = c.yellow1 },
 
     -- scss
@@ -581,3 +581,4 @@ theme.setup = function(cfg)
 end
 
 return theme
+
