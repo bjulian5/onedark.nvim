@@ -63,21 +63,22 @@ require('onedark').setup()
 
 | Option                   | Default    | Description                                                                                                                                                                       |
 | ------------------------ | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| colors                   | `{}`       | You can override specific color groups to use other groups or a hex color                                                                                                         |
+| colors                   | `{}`       | You can override specific color groups to use other groups or a hex color.                                                                                                        |
 | comment_style            | `italic`   | Highlight style for comments (check `:help highlight-args` for options)                                                                                                           |
-| dark_float               | `true`     | Float windows like the lsp diagnostics windows get a darker background.                                                                                                           |
-| dark_sidebar             | `true`     | Sidebar like windows like `NvimTree` get a darker background                                                                                                                      |
+| dark_float               | `false`    | Float windows like the lsp diagnostics windows get a darker background.                                                                                                           |
+| dark_sidebar             | `true`     | Sidebar like windows like `NvimTree` get a darker background.                                                                                                                     |
+| dev                      | `false`    | Developer Mode.                                                                                                                                                                   |
 | function_style           | `NONE`     | Highlight style for functions (check `:help highlight-args` for options)                                                                                                          |
-| hide_end_of_buffer       | `true`     | Enabling this option, will hide filler lines (~) after the end of the buffer                                                                                                      |
-| hide_inactive_statusline | `false`    | Enabling this option, will hide inactive statuslines and replace them with a thin border instead. Should work with the standard **StatusLine**.                                   |
+| hide_end_of_buffer       | `true`     | Enabling this option, will hide filler lines (~) after the end of the buffer.                                                                                                     |
+| hide_inactive_statusline | `true`    | Enabling this option, will hide inactive statuslines and replace them with a thin border instead. Should work with the standard **StatusLine**.                                   |
 | highlight_linenumber     | `false`    | Enabling this option, will enable dark color to `LineNr`, `SignColumn` and `CursorLineNr` highlights.(also support [gitsigns](https://github.com/lewis6991/gitsigns.nvim) plugin) |
 | keyword_style            | `italic`   | Highlight style for keywords (check `:help highlight-args` for options)                                                                                                           |
-| lualine_bold             | `false`    | When `true`, section headers in the lualine theme will be bold                                                                                                                    |
+| lualine_bold             | `false`    | When `true`, section headers in the lualine theme will be bold.                                                                                                                   |
 | msg_area_style           | `NONE`     | Highlight style for messages and cmdline (check `:help highlight-args` for options)                                                                                               |
-| overrides                | `function` | Override specific highlight groups. The function accpet colors as argument.                                                                                                       |
+| overrides                | `function` | Override specific highlight groups. The function accpet colors as argument. You can also add a non-exists highlight by enabling the `dev` mode.                                   |
 | sidebars                 | `{}`       | Set a darker background on sidebar-like windows. For example: `{"qf", "vista_kind", "terminal", "packer"}`                                                                        |
-| transparent              | `false`    | Enable this to disable setting the background color                                                                                                                               |
-| transparent_sidebar      | `false`    | Sidebar like windows like `NvimTree` get a transparent background                                                                                                                 |
+| transparent              | `false`    | Enable this to disable setting the background color.                                                                                                                              |
+| transparent_sidebar      | `false`    | Sidebar like windows like `NvimTree` get a transparent background.                                                                                                                |
 | variable_style           | `NONE`     | Highlight style for variables and identifiers (check `:help highlight-args` for options)                                                                                          |
 
 ```vim
@@ -163,6 +164,7 @@ set -as terminal-overrides ',*:Setulc=\E[58::2::%p1%{65536}%/%d::%p1%{256}%/%{25
 - [airblade/vim-gitgutter](https://github.com/airblade/vim-gitgutter)
 - [akinsho/nvim-bufferline.lua](https://github.com/akinsho/nvim-bufferline.lua)
 - [folke/lsp-trouble.nvim](https://github.com/folke/lsp-trouble.nvim)
+- [ggandor/lightspeed.nvim](https://github.com/ggandor/lightspeed.nvim)
 - [glepnir/dashboard-nvim](https://github.com/glepnir/dashboard-nvim)
 - [glepnir/lspsaga.nvim](https://github.com/glepnir/lspsaga.nvim)
 - [hrsh7th/nvim-cmp](https://github.com/hrsh7th/nvim-cmp)

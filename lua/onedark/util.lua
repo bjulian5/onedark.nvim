@@ -148,32 +148,6 @@ util.highlight = function(hi_name, hi)
   end
 end
 
---- Delete the autocmds when the theme changes to something else
-util.on_colorscheme = function()
-  if vim.g.colors_name ~= 'onedark' then
-    vim.cmd('autocmd! onedark')
-    vim.cmd('augroup! onedark')
-  end
-end
-
----@param cfg od.ConfigSchema
-util.autocmds = function(cfg)
-  vim.cmd('augroup onedark')
-  vim.cmd('autocmd!')
-  vim.cmd('autocmd ColorScheme * lua require("onedark.util").on_colorscheme()')
-  if cfg.dev then
-    vim.cmd('autocmd BufWritePost */lua/onedark/** nested colorscheme onedark')
-  end
-  for _, sidebar in ipairs(cfg.sidebars) do
-    if sidebar == 'terminal' then
-      vim.cmd('autocmd TermOpen * setlocal winhighlight=Normal:NormalSB,SignColumn:SignColumnSB')
-    else
-      vim.cmd(string.format('autocmd FileType %s setlocal winhighlight=Normal:NormalSB,SignColumn:SignColumnSB', sidebar))
-    end
-  end
-  vim.cmd('augroup end')
-end
-
 ---@param base od.Highlights.Base
 util.syntax = function(base)
   for hi_name, hi in pairs(base) do
@@ -190,14 +164,14 @@ util.terminal = function(colors)
   vim.g.terminal_color_7 = colors.fg_dark
   vim.g.terminal_color_15 = colors.fg0
   -- colors
-  vim.g.terminal_color_1 = colors.red1
+  vim.g.terminal_color_1 = colors.red0
   vim.g.terminal_color_9 = colors.red1
   vim.g.terminal_color_2 = colors.green0
   vim.g.terminal_color_10 = colors.green0
-  vim.g.terminal_color_3 = colors.yellow1
+  vim.g.terminal_color_3 = colors.yellow0
   vim.g.terminal_color_11 = colors.yellow1
   vim.g.terminal_color_4 = colors.blue0
-  vim.g.terminal_color_12 = colors.blue0
+  vim.g.terminal_color_12 = colors.blue1
   vim.g.terminal_color_5 = colors.purple0
   vim.g.terminal_color_13 = colors.purple0
   vim.g.terminal_color_6 = colors.cyan0
@@ -223,6 +197,18 @@ util.light_colors = function(colors)
   return ret
 end
 
+---Override custom highlights in `group`
+---@param group table
+---@param overrides table
+---@param force boolean
+util.apply_overrides = function(group, overrides, force)
+  for k, v in pairs(overrides) do
+    if type(v) == 'table' and group[k] ~= nil or force then
+      group[k] = v
+    end
+  end
+end
+
 ---@param hi od.Highlights
 util.load = function(hi)
   vim.cmd('hi clear')
@@ -233,22 +219,18 @@ util.load = function(hi)
   vim.o.termguicolors = true
   vim.g.colors_name = 'onedark'
 
+  -- override colors
+  local overrides = hi.config.overrides(hi.colors)
+  util.apply_overrides(hi.base, overrides, hi.config.dev)
+  util.apply_overrides(hi.plugins, overrides, hi.config.dev)
+
+  local autocmds = require('onedark.autocmds')
+
   -- load base theme
   util.syntax(hi.base)
-  util.autocmds(hi.config)
+  autocmds.set(hi.config)
   util.terminal(hi.colors)
   util.syntax(hi.plugins)
-end
-
----Override custom highlights in `group`
----@param group table
----@param overrides table
-util.apply_overrides = function(group, overrides)
-  for k, v in pairs(overrides) do
-    if group[k] ~= nil and type(v) == 'table' then
-      group[k] = v
-    end
-  end
 end
 
 ---@param colors od.ColorPalette
